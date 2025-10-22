@@ -3,35 +3,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Facebook Browser Blocker</title>
-<style>
-html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-body{display:flex;align-items:center;justify-content:center;background:#fff;color:#111}
-.container{max-width:720px;padding:20px;text-align:center}
-.btn{display:inline-block;padding:14px 20px;border-radius:10px;border:0;background:#0b67ff;color:#fff;font-weight:700;text-decoration:none}
-.notice{margin-top:16px;color:#666;font-size:14px}
-</style>
+
 </head>
-<body>
-<div class="container">
-<h1>فتح الرابط في المتصفح الخارجي</h1>
-<a id="openLink" class="btn" href="#" target="_blank" rel="noopener noreferrer">افتح في المتصفح الخارجي</a>
-<div class="notice" id="notice">جارٍ معالجة الرابط...</div>
-</div>
-<script>
-(function(){
-var raw = location.href.indexOf('?')>=0?location.href.split('?').slice(1).join('?'):'', target = '';
-if(!raw){document.getElementById('notice').textContent = 'لم يتم العثور على رابط بعد علامة الاستفهام.';document.getElementById('openLink').style.display='none';return}
-try{raw = decodeURIComponent(raw.replace(/^\/+/, ''));}catch(e){}
-if(/^https?:\/\//i.test(raw)) target = raw; else if(/^\/\//.test(raw)) target = 'https:'+raw; else target = 'https://'+raw;
-var a = document.getElementById('openLink'); a.href = target; document.getElementById('notice').textContent = 'الرابط: '+target;
-function tryOpen(){
-try{a.click();}catch(e){var evt = document.createEvent('MouseEvents'); evt.initEvent('click', true, true); a.dispatchEvent(evt);} 
-}
-setTimeout(tryOpen, 150);
-setTimeout(function(){
-if(document.hidden===false){document.getElementById('notice').textContent = 'إذا لم يُفتح المتصفح تلقائياً، اضغط زر "افتح في المتصفح الخارجي".';}
-},1000);
-})();
-</script>
-</body>
 </html>
