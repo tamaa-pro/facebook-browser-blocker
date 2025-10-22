@@ -3,6 +3,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Facebook Browser Blocker</title>
-
+<script>
+(function(){
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  if (/FBAN|FBAV|FB_IAB|Instagram|Messenger/i.test(ua)) {
+    const url = window.location.href;
+    window.location.href = "intent://" + url.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end";
+    setTimeout(() => {
+      window.open(url, "_system") || window.open(url, "_blank");
+    }, 1000);
+  }
+})();
+</script>
 </head>
 </html>
